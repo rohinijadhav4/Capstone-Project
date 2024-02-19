@@ -41,11 +41,56 @@ public class AmazonProductInfoExtractor {
 
 		System.out.println("");
 	}
+	
+	
+	static void invalid_login ()throws Exception
+	//Method for login
+	{
+		WebDriver driver =  new ChromeDriver();
+		
+		try {
+			
+	
+		driver.get("https://www.amazon.in/");
+		driver.manage().window().maximize();
+		//wait for a certain measure of time before throwing an exception
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+		Thread.sleep(3000);
+
+		// login
+		driver.findElement(By.id("nav-link-accountList-nav-line-1")).click();
+		System.out.println("Login initiated");
+		driver.findElement(By.id("ap_email")).sendKeys("rohinixyzabcpqr@gmail.com"+Keys.ENTER);
+		Thread.sleep(3000);
+		driver.findElement(By.id("ap_password")).sendKeys("rohini@12"+Keys.ENTER);
+
+		//exception handled because of steal element to continue code execution
+		//try catch allows to defined a block of code to be tested for exceptions(errors) while executed
+	
+			driver.findElement(By.id("signInSubmit")).click();
+
+	
+		System.out.println("***Login Un-Successful***");
+
+		System.out.println("###############################");
+		}catch(Exception e)
+		{
+			
+		}
+		finally {
+			driver.close();
+		}
+		
+	}
+
 
 
 	public static void main(String[] args) throws Exception {
 
 		WebDriver driver =  new ChromeDriver();
+		
+		//invalid login attempt
+		invalid_login();
 		//login to amazon.in
 		login(driver);
 
